@@ -1,0 +1,31 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: USER-SERVICE
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/users/**
+
+        - id: HOTEL-SERVICE
+          uri: lb://HOTEL-SERVICE
+          predicates:
+            - Path=/hotels/**
+
+        - id: RATING-SERVICE
+          uri: lb://RATING-SERVICE
+          predicates:
+            - Path=/ratings/**
+  config:
+    import: "optional:configserver:http://localhost:8085"
+
+okta:
+  oauth2:
+    client-id: 0oa9qqe0txGB14nHv5d7
+    client-secret: FF8Rz9eiibgMsYjU95btedLiwI2_z29EQiGsAnnm
+    scopes: openid, profile, email, offline_access
