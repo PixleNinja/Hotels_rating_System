@@ -1,1 +1,1 @@
-# Hotel Review System
+# Hotel Rating System
